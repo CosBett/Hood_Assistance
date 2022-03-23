@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.models import User
 from django.contrib import messages
+from . forms import SignupForms
 
 def log_in(request):
     if request.method =='POST':
@@ -18,4 +19,20 @@ def log_in(request):
     else:
 		    return render(request, 'registration/login.html', {})
     
-            
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignupForms(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get("password1")
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('login')
+    else:
+        form =  SignupForms     
+
+    signup_context = {'form':form}
+    
+    return render(request, 'registration/signup.html', signup_context)
