@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hoodapp',
     "pyuploadcare.dj",
+    'auths',
+    
 ]
 
 UPLOADCARE = {
