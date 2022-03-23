@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from pyuploadcare.dj.models import ImageField
+
 
 
 class Hood(models.Model):
@@ -55,5 +57,12 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
 
+class Post(models.Model):
+    title = models.CharField(max_length=150)
+    post = models.TextField(max_length=500)
+    hood = models.ForeignKey(Hood, on_delete=models.CASCADE, related_name='hood_post')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
+    date = models.DateTimeField(auto_now_add=True, blank=True)
+    photo =ImageField(blank=True, manual_crop="1280x720")
 
 
