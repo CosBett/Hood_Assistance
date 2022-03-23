@@ -32,7 +32,9 @@ INSTALLED_APPS = [
     'hoodapp',
     "pyuploadcare.dj",
     'auths',
-    
+    'crispy_forms',
+
+
 ]
 
 UPLOADCARE = {
