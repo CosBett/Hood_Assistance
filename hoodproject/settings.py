@@ -163,7 +163,7 @@ MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = 'homepage'
 
-LOGOUT_REDIRECT_URL = 'login'
+LOGOUT_REDIRECT_URL = 'landingpage'
 
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
