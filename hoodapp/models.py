@@ -65,4 +65,19 @@ class Post(models.Model):
     date = models.DateTimeField(auto_now_add=True, blank=True)
     photo =ImageField(blank=True, manual_crop="1280x720")
 
+    def __str__(self):
+        return self.title
 
+    def save_post(self):
+        self.save()    
+
+    def delete_post(self):
+        self.delete()
+
+    @classmethod
+    def search_project(cls, title):
+        return cls.objects.filter(title__icontains=title).all()
+
+    @classmethod
+    def all_posts(cls):
+        return cls.objects.all()
