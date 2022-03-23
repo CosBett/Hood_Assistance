@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 
 class Hood(models.Model):
@@ -34,4 +36,22 @@ class Profile(models.Model):
     profile_picture = models.ImageField(upload_to='images/')
     location = models.CharField(max_length=150, blank=False)
     hood = models.ForeignKey(Hood, on_delete=models.SET_NULL, related_name='member', blank=True, null=True )
+
+    def __str__(self):
+        return f'{self.username}Profile'
+    
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+            
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
+        
+    def save_profile(self):
+        self.save()    
+
+    def delete_profile(self):
+        self.delete()
         
