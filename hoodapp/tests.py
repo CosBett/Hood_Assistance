@@ -1,5 +1,5 @@
 from django.test import TestCase
-from . models import Hood,Profile,Post
+from . models import Hood,Profile,Post,Business
 from django.contrib.auth.models import User
 
 
@@ -72,3 +72,23 @@ class TestPost(TestCase):
         self.post.delete_post()
         post = Post.search_project('test')
         self.assertTrue(len(post) < 1)
+
+
+class TestBusiness(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(id=1, username='Prime')
+        self.hood = Hood(name = 'Clayworks',location='Kasarani',occupants_count= 150,admin= 'Prime', description = 'This is a test hood description',photo= 'clayworks.png', police_contact = 912, health_contact = 1234)
+        self.business = Business(name = 'Mamanguo', email= 'nguo@gmail.com', description = 'laundry services', hood=self.hood, user=self.user)
+        
+    def test_instance(self):
+        self.assertTrue(isinstance(self.business, Business))
+        
+    def test_save_hood(self):
+        business = Business.objects.all()
+        self.assertTrue(len(business)>0)
+        
+    def test_delete_hood(self):
+        business = Business.objects.all().delete()
+        self.assertTrue(len(business)>0)
+        
+                
