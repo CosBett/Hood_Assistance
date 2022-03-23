@@ -10,3 +10,19 @@ class Hood(models.Model):
     photo = models.ImageField(upload_to='images/')
     police_contact = models.ImageField(upload_to='images/')
     Health_contact = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.name}hood'
+    
+    def create_hood(self):
+        self.save()
+
+    def find_hood(cls,name):
+        return cls.objects.filter(name__icontains=name).all()
+
+    def save_hood(self):
+        self.save()
+        
+    def delete_hood(self):
+        self.delete()
+    
