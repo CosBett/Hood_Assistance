@@ -30,7 +30,7 @@ class Hood(models.Model):
         self.delete()
 
 class Profile(models.Model):
-    username = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     name = models.CharField(max_length=150, blank=True)
     bio = models.TextField(max_length=500, blank=True)
     profile_picture = models.ImageField(upload_to='images/')
@@ -38,7 +38,7 @@ class Profile(models.Model):
     hood = models.ForeignKey(Hood, on_delete=models.SET_NULL, related_name='member', blank=True, null=True )
 
     def __str__(self):
-        return f'{self.username}Profile'
+        return f'{self.user}Profile'
     
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -54,4 +54,6 @@ class Profile(models.Model):
 
     def delete_profile(self):
         self.delete()
-        
+
+
+
