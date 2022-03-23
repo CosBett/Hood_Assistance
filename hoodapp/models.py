@@ -1,11 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Hood(models.Model):
     name = models.CharField(max_length=150, blank=False)
     location = models.CharField(max_length=100)
     occupants_Count = models.ImageField(upload_to='images/')
-    admin = models.ForeignKey("User", on_delete=models.CASCADE, related_name='ad')
+    admin = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name='ad')
     description = models.TextField(max_length=500, blank=False)
     photo = models.ImageField(upload_to='images/')
     police_contact = models.ImageField(upload_to='images/')
@@ -25,4 +26,12 @@ class Hood(models.Model):
         
     def delete_hood(self):
         self.delete()
-    
+
+class Profile(models.Model):
+    username = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    name = models.CharField(max_length=150, blank=True)
+    bio = models.TextField(max_length=500, blank=True)
+    profile_picture = models.ImageField(upload_to='images/')
+    location = models.CharField(max_length=150, blank=False)
+    hood = models.ForeignKey(Hood, on_delete=models.SET_NULL, related_name='member', blank=True, null=True )
+        
