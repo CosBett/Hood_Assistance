@@ -36,3 +36,10 @@ def signup(request):
     signup_context = {'form':form}
     
     return render(request, 'registration/signup.html', signup_context)
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, "Logged out Sucessfully!")	
+
+    return redirect('login')
+

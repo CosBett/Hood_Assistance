@@ -5,7 +5,7 @@
     <div class="col-md-6">
       <div class="card mt-4 p-3 shadow-lg rounded ">
         <div class=" card-body ">
-          <h5 class="card-title "><a>Sign in to continue</a> <span style="float:right ">Don't have an account? <a  href="" class="text-info ">Register now</a></span></h5>
+          <h5 class="card-title "><a>Sign in to continue</a> <span style="float:right ">Don't have an account? <a  href="{% url 'signup'%}" class="text-info ">Register now</a></span></h5>
           <form action="" method=POST>
             {% csrf_token %}
             <div class="mb-3">
