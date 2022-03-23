@@ -81,3 +81,12 @@ class Post(models.Model):
     @classmethod
     def all_posts(cls):
         return cls.objects.all()
+
+class Business(models.Model):
+    name = models.CharField(max_length=150, blank=False)
+    email = models.EmailField()
+    description = models.TextField(max_length=500, blank=True)
+    neighbourhood = models.ForeignKey(Hood, on_delete=models.CASCADE, related_name='business')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owner')
+    
+    
