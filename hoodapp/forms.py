@@ -11,3 +11,7 @@ class HoodForm(forms.ModelForm):
         model =Hood
         exclude = ('admin',)
 
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        exclude = ('user', 'hood')
