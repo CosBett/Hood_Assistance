@@ -1,0 +1,44 @@
+{% extends 'base.html' %}{% load crispy_forms_tags %}{% block content %}
+<div class="container ">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 mt-4 bg-white prof mr-2 ml-2">
+      <img class="rounded-circle account-img d-block mx-auto" src="{{user.profile.profile.picture.url}}" height="125px" width="125px">
+      <h5 class="text-center mt-3">{{user.username}}</h5>
+      <p class="text-center"> {{user.email}}</p>
+      <p class="text-center"><strong>Bio:</strong>{{profile.bio}}</p>
+      <p class="text-center"><strong>Location:</strong>{{profile.location}}</p>
+      {% if request.user.profile.hood %}
+      <p class="text-center">My Hood <a class="btn btn-sm btn-info" href="{% url 'single-hood' user.profile.neighbourhood.id %}">{{ user.profile.neighbourhood.name }}</a>
+      </p>
+      {% endif %}
+    </div>
+    <div class="text-center"> <button type="button" class="btn btn-outline-success align-self-center" data-bs-toggle="modal" data-bs-target="#editprofileModal">
+      Edit Profile
+      </button>
+    </div>
+    <!-- Edit profile modal -->
+    <div class="modal fade" id="editprofileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update your information</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="" method="post" novalidate enctype="multipart/form-data">
+              {% csrf_token %} {{ form | crispy }}
+              <button class="btn btn-sm btn-outline-success"> Update</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-outline-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>
+{% endblock %}
