@@ -83,8 +83,22 @@ def join_hood(request, id):
     request.user.profile.save()
     return redirect('hood')
 
-def join_hood(request, id):
+def leave_hood(request, id):
     hood = get_object_or_404(Hood, id=id)
     request.user.profile.hood = None
     request.user.profile.save()
     return redirect('hood')
+
+
+def search_bussiness(request):
+    if request.method == 'GET':
+        name = request.GET.get("title")
+        results = Business.objects.filter(name__icontains=name).all()
+        print(results)
+        message = f'name'
+        context = { 'results': results, 'message': message
+        }
+        return render(request, 'search.html', context)
+    else:
+        message = "Please enter name of the bussiness you are searching"
+    return render(request, "search.html")
