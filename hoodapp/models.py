@@ -63,7 +63,7 @@ class Post(models.Model):
     hood = models.ForeignKey(Hood, on_delete=models.CASCADE, related_name='hood_post')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     date = models.DateTimeField(auto_now_add=True, blank=True)
-    photo =ImageField(blank=True, manual_crop="1280x720")
+    photo =models.ImageField(upload_to='images/')
 
     def __str__(self):
         return self.title

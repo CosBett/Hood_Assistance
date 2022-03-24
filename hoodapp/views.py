@@ -1,3 +1,4 @@
+from turtle import title
 from django.shortcuts import render,redirect
 from . models import Profile,Hood,Post,Business
 from .forms import HoodForm, BusinessForm,PostForm,UpdateProfileForm
@@ -52,9 +53,9 @@ def create_Business(request):
 
 
 def myhood(request, hood_id):
-    hoods = Hood.objects.get(id=hood_id)
-    businesses = Business.objects.filter(hood=hoods)
-    posts = Post.objects.filter(hood=hoods)
+    hoods = Hood.objects.get(id= hood_id)
+    businesses = Business.objects.filter(id=hood_id)
+    posts = Post.objects.filter(id=hood_id)
     posts = posts[::-1]
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -63,9 +64,15 @@ def myhood(request, hood_id):
             post.hood = hoods
             post.user = request.user
             post.save()
-            return redirect('myhood.html', hoods.id)
+            return redirect('hood')
     else:
         form = PostForm()
     myhood_context = { 'hoods': hoods,'posts': posts,'form': form,'businesses':businesses
     }
-    return render(request, 'single_hood.html', myhood_context)
+    return render(request, 'myhood.html', myhood_context)
+
+def hood_members(request, hood_id):
+    hood = Hood.objects.get(id=hood_id)
+    members = Profile.objects.filter(hood=hood)
+    members_context= {'members': members}
+    return render(request, 'members.html',members_context )
