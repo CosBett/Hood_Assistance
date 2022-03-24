@@ -33,3 +33,39 @@ def edit_profile(request, username):
 
     edit_profile_context={'form': form ,'profile':profile}    
     return render(request, 'profile.html',edit_profile_context )
+
+@login_required
+def create_Business(request):
+    businesses= Business.objects.all()
+    if request.method == 'POST':
+        form = BusinessForm(request.POST, request.FILES)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.user = request.user
+            business.save()
+            return redirect('business')
+    else:
+        form = BusinessForm()
+    business_context= {'form': form, 'businesses':businesses}    
+    return render(request, 'Business.html',business_context)
+
+
+
+def myhood(request, hood_id):
+    hoods = Hood.objects.get(id=hood_id)
+    businesses = Business.objects.filter(hood=hoods)
+    posts = Post.objects.filter(hood=hoods)
+    posts = posts[::-1]
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.hood = hoods
+            post.user = request.user
+            post.save()
+            return redirect('myhood.html', hoods.id)
+    else:
+        form = PostForm()
+    myhood_context = { 'hoods': hoods,'posts': posts,'form': form,'businesses':businesses
+    }
+    return render(request, 'single_hood.html', myhood_context)

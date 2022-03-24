@@ -9,15 +9,15 @@ from pyuploadcare.dj.models import ImageField
 class Hood(models.Model):
     name = models.CharField(max_length=150, blank=False)
     location = models.CharField(max_length=100)
-    occupants_Count = models.ImageField(upload_to='images/')
+    occupants_Count = models.PositiveIntegerField(null=True, blank=True)
     admin = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name='ad')
     description = models.TextField(max_length=500, blank=False)
     photo = models.ImageField(upload_to='images/')
-    police_contact = models.ImageField(upload_to='images/')
+    police_contact = models.PositiveIntegerField(null=True, blank=True)
     Health_contact = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return f'{self.name}hood'
+        return self.name
     
     def create_hood(self):
         self.save()
@@ -37,10 +37,10 @@ class Profile(models.Model):
     bio = models.TextField(max_length=500, blank=True)
     profile_picture = models.ImageField(upload_to='images/')
     location = models.CharField(max_length=150, blank=False)
-    hood = models.ForeignKey(Hood, on_delete=models.SET_NULL, related_name='member', blank=True, null=True )
+    hood = models.ForeignKey(Hood,on_delete=models.SET_NULL, related_name='member', blank=True, null=True )
 
     def __str__(self):
-        return f'{self.user}Profile'
+        return self.name
     
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -90,7 +90,7 @@ class Business(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owner')
     
     def __str__(self):
-        return f'{self.name}Business'
+        return self.name
     
     def create_business(self):
         self.save()

@@ -9,7 +9,7 @@
       <p class="text-center"><strong>Bio:</strong>{{profile.bio}}</p>
       <p class="text-center"><strong>Location:</strong>{{profile.location}}</p>
       {% if request.user.profile.hood %}
-      <p class="text-center">My Hood <a class="btn btn-sm btn-info" href="{% url 'single-hood' user.profile.neighbourhood.id %}">{{ user.profile.neighbourhood.name }}</a>
+      <p class="text-center">My Hood <a class="btn btn-sm btn-info" href="{% url 'single-hood' user.profile.neighbourhood.id %}">{{ user.profile.hood.name }}</a>
       </p>
       {% endif %}
     </div>
