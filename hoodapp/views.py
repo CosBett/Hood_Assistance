@@ -12,4 +12,3 @@ def index(request):
         'hoods':hoods
     }
     return render(request, 'index.html', {context} )
-    
