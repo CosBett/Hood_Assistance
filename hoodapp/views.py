@@ -1,5 +1,5 @@
 from turtle import title
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render,redirect
 from . models import Profile,Hood,Post,Business
 from .forms import HoodForm, BusinessForm,PostForm,UpdateProfileForm
 from django.contrib.auth.decorators import login_required
@@ -76,3 +76,9 @@ def hood_members(request, hood_id):
     members = Profile.objects.filter(hood=hood)
     members_context= {'members': members}
     return render(request, 'members.html',members_context )
+
+def join_hood(request, id):
+    hood = get_object_or_404(Hood, id=id)
+    request.user.profile.hood = hood
+    request.user.profile.save()
+    return redirect('hood')

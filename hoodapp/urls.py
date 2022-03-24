@@ -8,5 +8,6 @@ urlpatterns = [
     path('business/', views.create_Business,name='business' ),
     path('myhood/<hood_id>', views.myhood, name='hood' ),
     path('<hood_id>/members', views.hood_members, name='members'),
-
+    path('join_hood/<id>', views.join_hood, name='join-hood'),
+    
     ]
