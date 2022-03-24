@@ -5,4 +5,11 @@ def landing_page(request):
     pass
     return render(request,'landing_page.html', {}) 
 def index(request):
-    return render(request, 'index.html', {} )
+    hoods = Hood.objects.all()
+    hoods = hoods[:: -1]
+    
+    context ={
+        'hoods':hoods
+    }
+    return render(request, 'index.html', {context} )
+    
