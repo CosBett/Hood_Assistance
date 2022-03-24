@@ -6,4 +6,8 @@ class UpdateProfileForm(forms.ModelForm):
         model = Profile
         exclude = ('user', 'hood')
 
+class HoodForm(forms.ModelForm):
+    class Meta:
+        model =Hood
+        exclude = ('admin',)
 
