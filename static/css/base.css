@@ -11,5 +11,27 @@
   padding: 2%;
   color: white;
   text-align: center;
-  background-color: rgba(0, 128, 0, 0.303);
+  background-color: #aec17871;
+}
+
+#title-heading {
+  font-family: 'Fredericka the Great', cursive;
+  font-weight: 900;
+  color: #580aff;
+}
+
+#des {
+  font-family: 'Castoro', serif;
+  font-size: small;
+  line-height: 0.4;
+}
+
+#pened {
+  color: #580aff;
+  font-size: medium;
+}
+
+.signup {
+  font-size: small;
+  line-height: 0.9;
 }

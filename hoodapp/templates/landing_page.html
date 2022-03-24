@@ -13,8 +13,7 @@
   <!-- Google font CDN -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Creepster&family=Dongle:wght@400;700&family=EB+Garamond:ital@0;1&family=Hubballi&family=Italianno&family=Lobster&family=Shizuru&family=Tangerine&family=Yrsa:ital,wght@1,300&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Castoro:ital@1&family=Fredericka+the+Great&family=Playfair+Display:ital@1&family=Shrikhand&display=swap" rel="stylesheet">
   <!-- Static files -->
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
   <!-- bootstrap icons -->
@@ -26,8 +25,12 @@
 <body>
   <div class="container-fluid landing_page d-flex align-items-center">
     <div class="content">
-      <h1> Hood Assistant</h1>
-      <p>publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document o</p>
+      <h1 id="title-heading"> Hood Assistant</h1>
+      <p id="des">Your neighborhood watch volunteers!</p>
+      <p id="des">Everything that
+        <span id="pened">happened</span>, what 's <span id="pened">happening</span> and what will be <span id="pened">happening</span> around the hood.</p>
+      <p id="des">All in here!</p>
+
       <a href="{%url 'login'%}" class="btn btn-outline-light rounded-pill">Sign in 
 
       </a>
