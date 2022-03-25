@@ -54,17 +54,17 @@ def create_Business(request):
 
 def myhood(request, hood_id):
     hoods = Hood.objects.get(id= hood_id)
-    businesses = Business.objects.filter(id=hood_id)
-    posts = Post.objects.filter(id=hood_id)
+    businesses = Business.objects.filter(Hood=hoods)
+    posts = Post.objects.filter(hood=hoods)
     posts = posts[::-1]
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.hood = hoods
-            post.user = request.user
-            post.save()
-            return redirect('hood')
+            postfor = form.save(commit=False)
+            postfor.hood = hoods
+            postfor.user = request.user
+            postfor.save()
+            return redirect('hood',hoods.id)
     else:
         form = PostForm()
     myhood_context = { 'hoods': hoods,'posts': posts,'form': form,'businesses':businesses
@@ -81,13 +81,13 @@ def join_hood(request, id):
     hood = get_object_or_404(Hood, id=id)
     request.user.profile.hood = hood
     request.user.profile.save()
-    return redirect('hood')
+    return redirect('homepage')
 
 def leave_hood(request, id):
     hood = get_object_or_404(Hood, id=id)
     request.user.profile.hood = None
     request.user.profile.save()
-    return redirect('hood')
+    return redirect('homepage')
 
 
 def search_bussiness(request):

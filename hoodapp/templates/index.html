@@ -1,5 +1,25 @@
-{% extends 'base.html'%} {% block content%}
-<a class="btn btn-outline-info" href="{% url 'logout'%}">Log out</a>
-<a class="btn btn-outline-info" href="{% url 'profile' user.username%}">Profile</a>
-
-<h1>Homepage showing</h1>{% endblock %}
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
+<div class="container-fluid">
+  <div class="container mt-2">
+    <div class="row">
+      {% if user.profile.hood %}
+      <h3 id="hoodlink">Click to see what is happening in your {{user.profile.hood.name}} hood</h3>
+      <a class='btn btn-outline-info hlink btn-lg' href=" {% url 'hood' user.profile.hood.id %} "> {{user.profile.hood.name}}</a> {% else %}
+      <a href="" class="btn"> <span>  <h3 id="hoodlink">Welcome {{user.username}}, Join your hood to see what is happening</h3></span> </a> {% endif %} {% for hood in hoods %}
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-lg " style="min-height:300px;">
+          <img src="{{ hood.photo.url }}" class="card-img-top" alt="{{ hood.name }}" height="
+                250px">
+          <div class="card-body text-center">
+            <h5 class="card-title hoodname">{{ hood.name }} Hood ({{hood.location}})</h5>
+            <p class="card-text hood_des">{{hood.description}}</p>
+            {% if request.user.profile.hood == hood %}
+            <a href="{% url 'leave-hood' hood.id %}" class="btn btn-outline-info btn-sm">Leave Hood</a> {% elif not request.user.profile.hood %}
+            <a href="{% url 'join-hood' hood.id %}" class="btn btn-outline-info btn-sm ">Join Hood</a> {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>{% endblock %}

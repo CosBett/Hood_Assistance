@@ -35,3 +35,57 @@
   font-size: small;
   line-height: 0.9;
 }
+
+#padd {
+  padding-top: 70px;
+}
+
+nav {
+  background-color: #ADC178;
+}
+
+#proj {
+  color: white;
+  font-family: 'Abril Fatface', cursive;
+  font-size: xx-large;
+}
+
+#awardS {
+  color: black;
+  font-family: 'Abril Fatface', cursive;
+  font-size: x-large;
+}
+
+.hoodname {
+  font-family: 'Castoro', serif;
+  color: #0DCAF0;
+}
+
+.hood_des {
+  font-family: 'EB Garamond', serif;
+  font-size: small;
+}
+
+#hoodlink {
+  color: black;
+  font-family: 'Abril Fatface', cursive;
+  font-size: x-large;
+  text-align: center;
+}
+
+.hlink {
+  font-family: 'Abril Fatface', cursive;
+  font-size: x-large;
+  text-align: center;
+}
+
+#imgpost {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 3%;
+}
+
+#dat {
+  float: right;
+}
